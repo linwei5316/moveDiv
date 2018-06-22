@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        width: 100px;
+        height: 100px;
+        background: #3388ff;
+        position: absolute;
+        left: calc(50% - 50px);
+        top: calc(50% - 50px);
+        cursor: pointer;
+    }
+
+</style>
+<body>
+    <div data-ismove="false"></div>
+
+    <script>
+        var div = document.querySelector("div");
+        div.addEventListener("click",moveDiv);
+
+        function moveDiv(){
+            div.setAttribute("data-ismove", div.dataset.ismove == "false" ? "true" : "false");
+            if(div.dataset.ismove === "true"){
+                window.addEventListener("mousemove",xy);
+            }else{
+                window.removeEventListener("mousemove",xy);
+            }            
+        }
+
+        function xy(e){
+            console.log(e.clientX, e.clientY);            
+            div.style.left = e.clientX - 50 + "px";
+            div.style.top = e.clientY - 50 + "px";      
+        }
+    </script>
+</body>
+</html>
